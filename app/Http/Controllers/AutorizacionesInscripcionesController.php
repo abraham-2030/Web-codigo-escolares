@@ -11,13 +11,13 @@ class AutorizacionesInscripcionesController extends Controller
 {
     /**
      * Display a listing of the resource.
-     * Función READ - Mostrar todas las aseguradoras
+     * Función READ - Mostrar todas las Autorizaciones
      */
     public function index()
     {
-        // Obtener todas las aseguradoras ordenadas por nombre
+        // Obtener todas las Autorizaciones ordenadas por nombre
         $AutorizacionesInscripciones = AutorizacionesInscripciones::orderBy('id')->get();
-        
+
         // Retornar la vista con los datos
         return view('escolares.index', compact('AutorizacionesInscripciones'));
     }
@@ -29,11 +29,11 @@ class AutorizacionesInscripcionesController extends Controller
     public function create()
     {
         return view('escolares.create');
-    } 
+    }
 
     /**
      * Store a newly created resource in storage.
-     * Función CREATE - Guardar nueva aseguradora
+     * Función CREATE - Guardar nueva Autorizaciones
      */
     public function store(Request $request)
     {
@@ -46,7 +46,7 @@ class AutorizacionesInscripcionesController extends Controller
             'quien_autoriza' =>'required|string|max:255',
             'fecha_hora_autoriza' =>'required|date',
             'materia_afectada' =>'required|string|max:255',
-            'cantidad' =>'required|integer|min:1', 
+            'cantidad' =>'required|integer|min:1',
         ], [
             // Mensajes personalizados
             'periodo.' =>'periodo es obligatorio',
@@ -60,14 +60,14 @@ class AutorizacionesInscripcionesController extends Controller
         ]);
 
         try {
-            // Crear la nueva aseguradora
+            // Crear la nueva Autorizaciones
             AutorizacionesInscripciones::create($validatedData);
 
             // Redireccionar con mensaje de éxito
             return redirect()
                 ->route('escolares.index')
                 ->with('success', 'AutorizacionesInscripciones creada exitosamente');
-                
+
         } catch (\Exception $e) {
             // Redireccionar con mensaje de error
             return redirect()
@@ -106,7 +106,7 @@ class AutorizacionesInscripcionesController extends Controller
             'quien_autoriza' =>'required|string|max:255',
             'fecha_hora_autoriza' =>'required|date',
             'materia_afectada' =>'required|string|max:255',
-            'cantidad' =>'required|integer|min:1', 
+            'cantidad' =>'required|integer|min:1',
         ], [
            'periodo' =>'periodo es obligatorio',
             'no_de_control.required' =>'no_de_control es obligatorio',
@@ -121,11 +121,11 @@ class AutorizacionesInscripcionesController extends Controller
         try {
             // Actualizar la aseguradora
             $Autorizacion->update($validatedData);
- 
+
             return redirect()
                 ->route('escolares.index')
                 ->with('success', 'Autorizaciones Inscripciones actualizada exitosamente');
-                
+
         } catch (\Exception $e) {
             return redirect()
                 ->back()
@@ -143,13 +143,13 @@ class AutorizacionesInscripcionesController extends Controller
         try {
             $eliminar = AutorizacionesInscripciones::findOrFail($periodo);
             $periodo = $eliminar->periodo;
-            
+
             $eliminar->delete();
 
             return redirect()
                 ->route('escolares.index')
                 ->with('success', "Autorizaciones '$periodo' fue eliminada exitosamente");
-                
+
         } catch (\Exception $e) {
             return redirect()
                 ->route('escolares.index')
