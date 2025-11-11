@@ -19,7 +19,7 @@ class AutorizacionesInscripcionesController extends Controller
         $AutorizacionesInscripciones = AutorizacionesInscripciones::orderBy('id')->get();
 
         // Retornar la vista con los datos
-        return view('escolares.index', compact('AutorizacionesInscripciones'));
+        return view('escolares.Index', compact('AutorizacionesInscripciones'));
     }
 
     /**
