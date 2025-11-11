@@ -16,10 +16,10 @@ class AutorizacionesInscripcionesController extends Controller
     public function index()
     {
         // Obtener todas las aseguradoras ordenadas por nombre
-        $autorizacionesInscripciones = AutorizacionesInscripciones::orderBy('id')->get();
+        $AutorizacionesInscripciones = AutorizacionesInscripciones::orderBy('id')->get();
         
         // Retornar la vista con los datos
-        return view('escolares.index', compact('autorizacionesInscripciones'));
+        return view('escolares.index', compact('AutorizacionesInscripciones'));
     }
 
     /**
