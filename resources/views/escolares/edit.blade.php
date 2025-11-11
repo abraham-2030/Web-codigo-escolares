@@ -41,8 +41,9 @@
                                  name="periodo" 
                                 value="{{ $autorizar->periodo }}"
                                 readonly
-                                disabled>
-                            <small class="text-muted">La clave no se puede modificar</small>
+                                disable
+                                >
+                            <small class="text-muted">La clave si se puede modificar</small>
                         </div>
 
                         <!-- no_de_control -->

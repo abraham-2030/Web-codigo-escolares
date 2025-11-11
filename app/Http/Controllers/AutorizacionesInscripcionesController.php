@@ -16,10 +16,10 @@ class AutorizacionesInscripcionesController extends Controller
     public function index()
     {
         // Obtener todas las aseguradoras ordenadas por nombre
-        $AutorizacionesInscripciones = AutorizacionesInscripciones::orderBy('periodo')->get();
+        $autorizacionesInscripciones = AutorizacionesInscripciones::orderBy('id')->get();
         
         // Retornar la vista con los datos
-        return view('escolares.index', compact('AutorizacionesInscripciones'));
+        return view('escolares.index', compact('autorizacionesInscripciones'));
     }
 
     /**
@@ -39,7 +39,7 @@ class AutorizacionesInscripcionesController extends Controller
     {
         // Validar los datos del formulario
         $validatedData = $request->validate([
-            'periodo' =>'required|string|max:255',
+            'periodo' =>'string|max:255',
             'no_de_control' =>'required|string|max:255',
             'tipo_autorizacion' =>'required|string|max:255',
             'motivo_autorizacion' =>'required|string|max:255',
@@ -49,7 +49,7 @@ class AutorizacionesInscripcionesController extends Controller
             'cantidad' =>'required|integer|min:1', 
         ], [
             // Mensajes personalizados
-            'periodo.required' =>'periodo es obligatorio',
+            'periodo.' =>'periodo es obligatorio',
             'no_de_control.required' =>'no_de_control es obligatorio',
             'tipo_autorizacion.required' =>'tipo_autorización es obligatorio',
             'motivo_autorizacion.required' =>'motivo_autorización es obligatoria',
@@ -87,9 +87,9 @@ class AutorizacionesInscripcionesController extends Controller
      * Show the form for editing the specified resource.
      * Mostrar el formulario de edición
      */
-    public function edit($id)
+    public function edit($periodo)
     {
-        $autorizar = AutorizacionesInscripciones::findOrFail($id);
+        $autorizar = AutorizacionesInscripciones::findOrFail($periodo);
         return view('escolares.edit', compact('autorizar'));
     }
 
@@ -99,7 +99,7 @@ class AutorizacionesInscripcionesController extends Controller
 
         // Validar los datos (clave_aseguradora no se puede modificar)
         $validatedData = $request->validate([
-            'periodo' =>'string|max:255',
+            'periodo' => 'string|max:255',
             'no_de_control' =>'required|string|max:255',
             'tipo_autorizacion' =>'required|string|max:255',
             'motivo_autorizacion' =>'required|string|max:255',
@@ -108,7 +108,7 @@ class AutorizacionesInscripcionesController extends Controller
             'materia_afectada' =>'required|string|max:255',
             'cantidad' =>'required|integer|min:1', 
         ], [
-           'periodo.' =>'periodo es obligatorio',
+           'periodo' =>'periodo es obligatorio',
             'no_de_control.required' =>'no_de_control es obligatorio',
             'tipo_autorizacion.required' =>'tipo_autorización es obligatorio',
             'motivo_autorizacion.required' =>'motivo_autorización es obligatoria',
@@ -138,10 +138,10 @@ class AutorizacionesInscripcionesController extends Controller
      * Remove the specified resource from storage.
      * Función DELETE - Eliminar aseguradora
      */
-    public function destroy($clave_periodo)
+    public function destroy($periodo)
     {
         try {
-            $eliminar = AutorizacionesInscripciones::findOrFail($clave_periodo);
+            $eliminar = AutorizacionesInscripciones::findOrFail($periodo);
             $periodo = $eliminar->periodo;
             
             $eliminar->delete();

@@ -14,7 +14,7 @@
             </a>
         </div>
     </div>
-
+   
     <!-- Mensajes de éxito/error -->
     @if(session('success'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -76,7 +76,7 @@
                                                     <i class="bi bi-trash"></i> Eliminar
                                                 </button>
                                             </form>
-                                        </div>
+                                        </div>  
                                     </td>
                                 </tr>
                             @endforeach
@@ -85,7 +85,7 @@
                 </div>
             @else
                 <div class="alert alert-info">
-                    <i class="bi bi-info-circle"></i> No hay Autorizaciones Inscripciones registradas.
+                    wire:  <i class="bi bi-info-circle"></i> No hay Autorizaciones Inscripciones registradas.
                     <a href="{{ route('escolares.create') }}">Crear la primera</a>
                 </div>
             @endif
